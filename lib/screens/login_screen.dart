@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
 import 'package:mobdev_midterm/widgets/buttons/secondary_button.dart';
-import 'package:mobdev_midterm/widgets/formFields/custom_text_form_field.dart';
+import 'package:mobdev_midterm/widgets/formFields/custom_text_field.dart';
 import 'package:mobdev_midterm/widgets/formFields/password_field.dart';
 import 'package:mobdev_midterm/screens/dashboard.dart';
 
