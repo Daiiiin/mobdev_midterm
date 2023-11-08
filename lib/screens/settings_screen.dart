@@ -24,7 +24,11 @@ class _SettingsState extends State<Settings> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 PrimaryButton(
-                    text: "Logout", icon: Icons.logout, onPressed: logout)
+                  text: "Logout",
+                  icon: Icons.logout,
+                  onPressed: logout,
+                  color: const Color.fromARGB(255, 24, 46, 94),
+                )
               ],
             ),
           )),

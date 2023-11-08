@@ -22,7 +22,7 @@ class _LoginScreen extends State<LoginScreen> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          color: const Color.fromARGB(255, 245, 234, 193),
+          color: const Color.fromARGB(255, 148, 191, 255),
           alignment: Alignment.topCenter,
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: SingleChildScrollView(
@@ -60,7 +60,11 @@ class _LoginScreen extends State<LoginScreen> {
                   height: 20.0,
                 ),
                 PrimaryButton(
-                    text: "Login", icon: Icons.login, onPressed: login),
+                  text: "Login",
+                  icon: Icons.login,
+                  onPressed: login,
+                  color: const Color.fromARGB(255, 24, 46, 94),
+                ),
                 const SizedBox(
                   height: 20.0,
                 ),
