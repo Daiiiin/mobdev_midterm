@@ -1,18 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:mobdev_midterm/screens/login_screen.dart';
+import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
 
-class Settings extends StatelessWidget {
+class Settings extends StatefulWidget {
   static const String routeName = "settings";
   const Settings({super.key});
 
+  @override
+  State<Settings> createState() => _SettingsState();
+}
+
+class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
       ),
-      body: const Center(
-        child: Text("This is the settings page."),
-      ),
+      body: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                PrimaryButton(
+                    text: "Logout", icon: Icons.logout, onPressed: logout)
+              ],
+            ),
+          )),
     );
+  }
+
+  void logout() {
+    Navigator.pushReplacementNamed(context, LoginScreen.routeName);
   }
 }
