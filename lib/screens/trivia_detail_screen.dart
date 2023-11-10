@@ -4,13 +4,13 @@ import 'package:mobdev_midterm/models/question_model.dart';
 class TriviaDetailScreen extends StatelessWidget {
   final TriviaQuestion question;
 
-  TriviaDetailScreen({required this.question});
+  const TriviaDetailScreen({super.key, required this.question});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trivia Detail'),
+        title: const Text('Trivia Detail'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

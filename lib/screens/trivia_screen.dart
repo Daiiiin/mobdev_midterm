@@ -6,7 +6,10 @@ import 'dart:convert';
 
 class TriviaScreen extends StatefulWidget {
   static const String routeName = "triviaScreen";
+
+  const TriviaScreen({super.key});
   @override
+  // ignore: library_private_types_in_public_api
   _TriviaScreenState createState() => _TriviaScreenState();
 }
 
@@ -23,7 +26,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trivia App'),
+        title: const Text('Trivia App'),
       ),
       body: Center(
         child: FutureBuilder<List<TriviaQuestion>>(
@@ -35,7 +38,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
               return Text('Error: ${snapshot.error}');
             }
 
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           },
         ),
       ),
@@ -58,7 +61,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
 class TriviaList extends StatelessWidget {
   final List<TriviaQuestion> questions;
 
-  TriviaList({required this.questions});
+  const TriviaList({super.key, required this.questions});
 
   @override
   Widget build(BuildContext context) {
