@@ -1,12 +1,10 @@
 // // ignore_for_file: file_names
 // ignore_for_file: avoid_print
 
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mobdev_midterm/models/question_model.dart';
+// import 'package:mobdev_midterm/models/question_model.dart';
 import 'package:mobdev_midterm/screens/settings_screen.dart';
-import 'package:http/http.dart' as http;
 import 'package:mobdev_midterm/screens/trivia_screen.dart';
 import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
 
@@ -48,7 +46,7 @@ class _DashboardState extends State<Dashboard> {
           PrimaryButton(
               text: "Start Trivia",
               icon: Icons.play_arrow,
-              onPressed: main,
+              onPressed: trivia,
               color: const Color.fromARGB(255, 24, 46, 94)),
           const Spacer(),
         ]),
@@ -61,7 +59,7 @@ class _DashboardState extends State<Dashboard> {
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.dashboard),
-              label: "Dasboard",
+              label: "Home",
               backgroundColor: Color.fromARGB(255, 255, 255, 255)),
           BottomNavigationBarItem(
               icon: Icon(Icons.account_circle_outlined),
@@ -72,32 +70,20 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  callApi() async {
-    final response =
-        await http.get(Uri.parse('https://opentdb.com/api.php?amount=10'));
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> data = json.decode(response.body);
-      final List<Map<String, dynamic>> results = List.from(data['results']);
-      return results.map((json) => TriviaQuestion.fromJson(json)).toList();
-    } else {
-      throw Exception('Failed to load trivia questions');
-    }
-  }
-
-  void main() async {
-    try {
-      List<TriviaQuestion> questions = await callApi();
-      for (var question in questions) {
-        print('Category: ${question.category}');
-        print('Question: ${question.question}');
-        print('Correct Answer: ${question.correctAnswer}');
-        print('Incorrect Answers: ${question.incorrectAnswers}');
-        print('---');
-      }
-    } catch (e) {
-      print('Error: $e');
-    }
-  }
+  // void main() async {
+  //   try {
+  //     List<TriviaQuestion> questions = await callApi();
+  //     for (var question in questions) {
+  //       print('Category: ${question.category}');
+  //       print('Question: ${question.question}');
+  //       print('Correct Answer: ${question.correctAnswer}');
+  //       print('Incorrect Answers: ${question.incorrectAnswers}');
+  //       print('---');
+  //     }
+  //   } catch (e) {
+  //     print('Error: $e');
+  //   }
+  // }
 
   void settings() {
     Navigator.pushNamed(
