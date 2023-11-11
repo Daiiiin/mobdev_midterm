@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mobdev_midterm/constants.dart';
 import 'package:mobdev_midterm/screens/settings_screen.dart';
 import 'package:mobdev_midterm/screens/trivia_screen.dart';
-import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
 
 class Dashboard extends StatefulWidget {
   // static const String routeName = "dashboard";
@@ -30,11 +29,27 @@ class _DashboardState extends State<Dashboard> {
         const SizedBox(
           height: 100.0,
         ),
-        PrimaryButton(
-            text: "Start Trivia",
-            icon: Icons.play_arrow,
-            onPressed: trivia,
-            color: secondary),
+        ElevatedButton(
+          onPressed: trivia,
+          style: ElevatedButton.styleFrom(
+              backgroundColor: secondary,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0))),
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 10.0,
+              ),
+              Text(
+                "Start Trivia",
+                style: TextStyle(fontSize: 17.0),
+              )
+            ],
+          ),
+        ),
         const Spacer(),
       ]),
     );
