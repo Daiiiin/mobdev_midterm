@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobdev_midterm/constants.dart';
+import 'package:mobdev_midterm/screens/home.dart';
+import 'package:mobdev_midterm/screens/signup_screen.dart';
 import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
 import 'package:mobdev_midterm/widgets/buttons/secondary_button.dart';
 import 'package:mobdev_midterm/widgets/formFields/custom_text_field.dart';
 import 'package:mobdev_midterm/widgets/formFields/password_field.dart';
-import 'package:mobdev_midterm/screens/dashboard.dart';
+// import 'package:mobdev_midterm/screens/dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "login";
@@ -72,7 +74,7 @@ class _LoginScreen extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text("Dont have an account? "),
-                    SecondaryButton(text: "Register", onPressed: () {}),
+                    SecondaryButton(text: "Register", onPressed: signUp),
                   ],
                 ),
                 SecondaryButton(text: "Forgot Password?", onPressed: () {}),
@@ -85,7 +87,12 @@ class _LoginScreen extends State<LoginScreen> {
   }
 
   void login() {
-    Navigator.pushReplacementNamed(context, Dashboard.routeName);
+    Navigator.pushNamedAndRemoveUntil(
+        context, HomeScreen.routeName, ModalRoute.withName('/login'));
+  }
+
+  void signUp() {
+    Navigator.pushNamed(context, SignUp.routeName);
   }
 
   void setPasswordVisibility() {

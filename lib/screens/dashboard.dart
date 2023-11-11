@@ -6,7 +6,7 @@ import 'package:mobdev_midterm/screens/trivia_screen.dart';
 import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
 
 class Dashboard extends StatefulWidget {
-  static const String routeName = "dashboard";
+  // static const String routeName = "dashboard";
   const Dashboard({super.key});
 
   @override
@@ -16,54 +16,27 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "HOME",
+    return Container(
+      color: primary,
+      padding: const EdgeInsets.all(12.0),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        const Spacer(),
+        Text("Let's Play Trivia!",
+            style: GoogleFonts.exo2(
+                textStyle: const TextStyle(
+                    fontSize: 50, fontWeight: FontWeight.bold))),
+        const Text(
+            "Challenge your brain with the most random trivia questions."),
+        const SizedBox(
+          height: 100.0,
         ),
-        actions: [
-          IconButton(onPressed: settings, icon: const Icon(Icons.settings))
-        ],
-        backgroundColor: secondary,
-      ),
-      body: Container(
-        color: primary,
-        padding: const EdgeInsets.all(12.0),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          const Spacer(),
-          Text("Let's Play Trivia!",
-              style: GoogleFonts.exo2(
-                  textStyle: const TextStyle(
-                      fontSize: 50, fontWeight: FontWeight.bold))),
-          const Text(
-              "Challenge your brain with the most random trivia questions."),
-          const SizedBox(
-            height: 100.0,
-          ),
-          PrimaryButton(
-              text: "Start Trivia",
-              icon: Icons.play_arrow,
-              onPressed: trivia,
-              color: secondary),
-          const Spacer(),
-        ]),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: secondary,
-        unselectedLabelStyle:
-            const TextStyle(color: Colors.white, fontSize: 14),
-        unselectedItemColor: primary,
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.dashboard),
-              label: "Home",
-              backgroundColor: Color.fromARGB(255, 255, 255, 255)),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle_outlined),
-              label: "Profile",
-              backgroundColor: Color.fromARGB(255, 255, 255, 255))
-        ],
-      ),
+        PrimaryButton(
+            text: "Start Trivia",
+            icon: Icons.play_arrow,
+            onPressed: trivia,
+            color: secondary),
+        const Spacer(),
+      ]),
     );
   }
 

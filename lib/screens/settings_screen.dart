@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobdev_midterm/constants.dart';
 import 'package:mobdev_midterm/screens/login_screen.dart';
 import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
 
@@ -16,8 +17,10 @@ class _SettingsState extends State<Settings> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
+        backgroundColor: secondary,
       ),
       body: Container(
+          color: primary,
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Center(
             child: Column(
@@ -36,6 +39,7 @@ class _SettingsState extends State<Settings> {
   }
 
   void logout() {
-    Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+    Navigator.pushNamedAndRemoveUntil(
+        context, LoginScreen.routeName, ModalRoute.withName('/settings'));
   }
 }

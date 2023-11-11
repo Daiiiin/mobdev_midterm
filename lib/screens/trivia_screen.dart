@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobdev_midterm/constants.dart';
 import 'package:mobdev_midterm/models/question_model.dart';
-import 'package:mobdev_midterm/screens/dashboard.dart';
+// import 'package:mobdev_midterm/screens/dashboard.dart';
 import 'package:http/http.dart' as http;
+import 'package:mobdev_midterm/screens/home.dart';
 import 'package:mobdev_midterm/widgets/trivia/next_button.dart';
 import 'package:mobdev_midterm/widgets/trivia/option_card.dart';
 import 'package:mobdev_midterm/widgets/trivia/question_widget.dart';
@@ -59,7 +60,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(
                       context,
-                      Dashboard.routeName,
+                      HomeScreen.routeName,
                       ModalRoute.withName('/triviaScreen'));
                 },
               ));
