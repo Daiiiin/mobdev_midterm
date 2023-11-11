@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobdev_midterm/constants.dart';
 import 'package:mobdev_midterm/models/question_model.dart';
+import 'package:mobdev_midterm/screens/dashboard.dart';
 import 'package:mobdev_midterm/screens/trivia_detail_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobdev_midterm/widgets/trivia/next_button.dart';
@@ -48,13 +49,30 @@ class _TriviaScreenState extends State<TriviaScreen> {
   bool isAlreadySelected = false;
   void nextQuestion(int questionLength) {
     if (index == questionLength - 1) {
+      // this is the block where the questions end.
       showDialog(
           context: context,
-          barrierDismissible: false,
+          barrierDismissible:
+              false, // this will disable the dissmis function on clicking outside of box
           builder: (ctx) => ResultBox(
-              result: score,
-              questionLength: questionLength,
-              onPressed: startOver));
+                result: score, // total points the user got
+                questionLength: questionLength, // out of how many questions
+                onPressed: startOver,
+              ));
+    } else {
+      if (isPressed) {
+        setState(() {
+          index++; // when the index will change to 1. rebuild the app.
+          isPressed = false;
+          isAlreadySelected = false;
+        });
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Please select any option'),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.symmetric(vertical: 20.0),
+        ));
+      }
     }
   }
 
@@ -65,14 +83,15 @@ class _TriviaScreenState extends State<TriviaScreen> {
       isPressed = false;
       isAlreadySelected = false;
     });
-    Navigator.pop(context);
+    // Navigator.pop(context);
+    Navigator.pushReplacementNamed(context, Dashboard.routeName);
   }
 
-  void checkAnswerAndUpdate(bool value) {
+  void checkAnswerAndUpdate(String value, String correctAnswer) {
     if (isAlreadySelected) {
       return;
     } else {
-      if (value == true) {
+      if (value == correctAnswer) {
         score++;
       }
       setState(() {
@@ -95,6 +114,11 @@ class _TriviaScreenState extends State<TriviaScreen> {
             );
           } else if (snapshot.hasData) {
             var extractedData = snapshot.data as List<TriviaQuestion>;
+            var options = extractedData[index].incorrectAnswers;
+            options.add(extractedData[index].correctAnswer);
+            options.shuffle();
+            print(options);
+
             return Scaffold(
               // change the background
               backgroundColor: primary,
@@ -132,13 +156,10 @@ class _TriviaScreenState extends State<TriviaScreen> {
                         i < extractedData[index].incorrectAnswers.length;
                         i++)
                       GestureDetector(
-                        onTap: () => checkAnswerAndUpdate(extractedData[index]
-                            .correctAnswer
-                            .value
-                            .toList()[i]),
+                        onTap: () => checkAnswerAndUpdate(options.toList()[i],
+                            extractedData[index].correctAnswer),
                         child: OptionCard(
-                          option:
-                              extractedData[index].incorrectAnswers.toList()[i],
+                          option: options.toList()[i],
                           color: isPressed
                               ? extractedData[index]
                                           .incorrectAnswers

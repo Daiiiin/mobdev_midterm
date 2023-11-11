@@ -8,6 +8,7 @@ class TriviaQuestion {
   String question;
   String correctAnswer;
   List<String> incorrectAnswers;
+  // List<String> options;
 
   TriviaQuestion({
     required this.category,
@@ -16,6 +17,7 @@ class TriviaQuestion {
     required this.question,
     required this.correctAnswer,
     required this.incorrectAnswers,
+    // required this.options,
   });
 
   factory TriviaQuestion.fromJson(Map<String, dynamic> json) {
