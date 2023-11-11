@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobdev_midterm/constants.dart';
 // import 'package:mobdev_midterm/models/question_model.dart';
 import 'package:mobdev_midterm/screens/settings_screen.dart';
 import 'package:mobdev_midterm/screens/trivia_screen.dart';
@@ -27,10 +28,10 @@ class _DashboardState extends State<Dashboard> {
         actions: [
           IconButton(onPressed: settings, icon: const Icon(Icons.settings))
         ],
-        backgroundColor: const Color.fromARGB(255, 24, 46, 94),
+        backgroundColor: secondary,
       ),
       body: Container(
-        color: const Color.fromARGB(255, 148, 191, 255),
+        color: primary,
         padding: const EdgeInsets.all(12.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           const Spacer(),
@@ -47,15 +48,15 @@ class _DashboardState extends State<Dashboard> {
               text: "Start Trivia",
               icon: Icons.play_arrow,
               onPressed: trivia,
-              color: const Color.fromARGB(255, 24, 46, 94)),
+              color: secondary),
           const Spacer(),
         ]),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 24, 46, 94),
+        backgroundColor: secondary,
         unselectedLabelStyle:
             const TextStyle(color: Colors.white, fontSize: 14),
-        unselectedItemColor: const Color.fromARGB(255, 148, 191, 255),
+        unselectedItemColor: primary,
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.dashboard),

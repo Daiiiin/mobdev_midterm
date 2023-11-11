@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobdev_midterm/constants.dart';
 import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
 import 'package:mobdev_midterm/widgets/buttons/secondary_button.dart';
 import 'package:mobdev_midterm/widgets/formFields/custom_text_field.dart';
@@ -22,7 +23,7 @@ class _LoginScreen extends State<LoginScreen> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          color: const Color.fromARGB(255, 148, 191, 255),
+          color: primary,
           alignment: Alignment.topCenter,
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: SingleChildScrollView(
@@ -63,7 +64,7 @@ class _LoginScreen extends State<LoginScreen> {
                   text: "Login",
                   icon: Icons.login,
                   onPressed: login,
-                  color: const Color.fromARGB(255, 24, 46, 94),
+                  color: secondary,
                 ),
                 const SizedBox(
                   height: 20.0,
