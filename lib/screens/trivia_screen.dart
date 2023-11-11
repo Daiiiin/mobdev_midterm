@@ -146,7 +146,9 @@ class _TriviaScreenState extends State<TriviaScreen> {
                             extractedData[index].options.toList()[i],
                             extractedData[index].correctAnswer),
                         child: OptionCard(
-                          option: extractedData[index].options.toList()[i],
+                          option: extractedData[index].options.toList()[i] =
+                              unescape.convert(
+                                  extractedData[index].options.toList()[i]),
                           color: isPressed
                               ? (extractedData[index].options[i] ==
                                       extractedData[index].correctAnswer

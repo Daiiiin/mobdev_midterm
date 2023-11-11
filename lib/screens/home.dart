@@ -35,11 +35,12 @@ class _HomeState extends State<HomeScreen> {
         backgroundColor: secondary,
         type: BottomNavigationBarType.fixed,
         // selected
-        selectedIconTheme: const IconThemeData(size: 26),
+        selectedIconTheme: const IconThemeData(size: 30),
         selectedFontSize: 15,
         selectedItemColor: Colors.white,
         // unselected
         showUnselectedLabels: false,
+        unselectedIconTheme: const IconThemeData(size: 26),
         unselectedItemColor: primary,
 
         items: const [
