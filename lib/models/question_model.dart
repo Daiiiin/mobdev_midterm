@@ -7,8 +7,8 @@ class TriviaQuestion {
   String difficulty;
   String question;
   String correctAnswer;
-  List<String> incorrectAnswers;
-  // List<String> options;
+  List<String> inCorrectAnswers;
+  List<String> options;
 
   TriviaQuestion({
     required this.category,
@@ -16,30 +16,22 @@ class TriviaQuestion {
     required this.difficulty,
     required this.question,
     required this.correctAnswer,
-    required this.incorrectAnswers,
-    // required this.options,
+    required this.inCorrectAnswers,
+    required this.options,
   });
 
   factory TriviaQuestion.fromJson(Map<String, dynamic> json) {
+    List<String> newOptions = List<String>.from(json['incorrect_answers']);
+    newOptions.add(json['correct_answer']);
+    newOptions.shuffle();
     return TriviaQuestion(
       category: json['category'],
       type: json['type'],
       difficulty: json['difficulty'],
       question: json['question'],
       correctAnswer: json['correct_answer'],
-      incorrectAnswers: List<String>.from(json['incorrect_answers']),
+      inCorrectAnswers: List<String>.from(json['incorrect_answers']),
+      options: newOptions,
     );
   }
-
-  // Future<List<TriviaQuestion>> fetchTriviaQuestions() async {
-  //   final response =
-  //       await http.get(Uri.parse('https://opentdb.com/api.php?amount=10'));
-  //   if (response.statusCode == 200) {
-  //     final Map<String, dynamic> data = json.decode(response.body);
-  //     final List<Map<String, dynamic>> results = List.from(data['results']);
-  //     return results.map((json) => TriviaQuestion.fromJson(json)).toList();
-  //   } else {
-  //     throw Exception('Failed to load trivia questions');
-  //   }
-  // }
 }

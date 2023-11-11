@@ -44,22 +44,33 @@ class ResultBox extends StatelessWidget {
               result == questionLength / 2
                   ? 'Almost There' // when the result is half of the questions
                   : result < questionLength / 2
-                      ? 'Try Again ?' // when the result is less than half
-                      : 'Great!', // when the result is more than half
+                      ? 'Nice try.' // when the result is less than half
+                      : 'You did great!', // when the result is more than half
               style: const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
             ),
             const SizedBox(height: 25.0),
-            GestureDetector(
-              onTap: onPressed,
+            TextButton(
+              onPressed: onPressed,
               child: const Text(
-                'Start Over',
+                'Home',
                 style: TextStyle(
                   color: Colors.blue,
                   fontSize: 20.0,
                   letterSpacing: 1.0,
                 ),
               ),
-            ),
+            )
+            // GestureDetector(
+            //   onTap: onPressed,
+            //   child: const Text(
+            //     'Home',
+            //     style: TextStyle(
+            //       color: Colors.blue,
+            //       fontSize: 20.0,
+            //       letterSpacing: 1.0,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

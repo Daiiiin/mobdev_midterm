@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobdev_midterm/constants.dart';
 import 'package:mobdev_midterm/models/question_model.dart';
 import 'package:mobdev_midterm/screens/dashboard.dart';
-import 'package:mobdev_midterm/screens/trivia_detail_screen.dart';
+// import 'package:mobdev_midterm/screens/trivia_detail_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobdev_midterm/widgets/trivia/next_button.dart';
 import 'package:mobdev_midterm/widgets/trivia/option_card.dart';
@@ -57,7 +57,12 @@ class _TriviaScreenState extends State<TriviaScreen> {
           builder: (ctx) => ResultBox(
                 result: score, // total points the user got
                 questionLength: questionLength, // out of how many questions
-                onPressed: startOver,
+                onPressed: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      Dashboard.routeName,
+                      ModalRoute.withName('/triviaScreen'));
+                },
               ));
     } else {
       if (isPressed) {
@@ -76,16 +81,16 @@ class _TriviaScreenState extends State<TriviaScreen> {
     }
   }
 
-  void startOver() {
-    setState(() {
-      index = 0;
-      score = 0;
-      isPressed = false;
-      isAlreadySelected = false;
-    });
-    // Navigator.pop(context);
-    Navigator.pushReplacementNamed(context, Dashboard.routeName);
-  }
+  // void startOver() {
+  //   // setState(() {
+  //   //   index = 0;
+  //   //   score = 0;
+  //   //   isPressed = false;
+  //   //   isAlreadySelected = false;
+  //   // });
+  //   // Navigator.pop(context);
+  //   Navigator.pushReplacementNamed(context, Dashboard.routeName);
+  // }
 
   void checkAnswerAndUpdate(String value, String correctAnswer) {
     if (isAlreadySelected) {
@@ -114,10 +119,9 @@ class _TriviaScreenState extends State<TriviaScreen> {
             );
           } else if (snapshot.hasData) {
             var extractedData = snapshot.data as List<TriviaQuestion>;
-            var options = extractedData[index].incorrectAnswers;
-            options.add(extractedData[index].correctAnswer);
-            options.shuffle();
-            print(options);
+            // var options = extractedData[index].inCorrectAnswers;
+            // options.add(extractedData[index].correctAnswer);
+            // options.shuffle();
 
             return Scaffold(
               // change the background
@@ -153,20 +157,21 @@ class _TriviaScreenState extends State<TriviaScreen> {
                     // add some space
                     const SizedBox(height: 25.0),
                     for (int i = 0;
-                        i < extractedData[index].incorrectAnswers.length;
+                        // i < options.length;
+                        i < extractedData[index].options.length;
+                        // i < extractedData[index].incorrectAnswers.length;
                         i++)
                       GestureDetector(
-                        onTap: () => checkAnswerAndUpdate(options.toList()[i],
+                        onTap: () => checkAnswerAndUpdate(
+                            extractedData[index].options.toList()[i],
                             extractedData[index].correctAnswer),
                         child: OptionCard(
-                          option: options.toList()[i],
+                          option: extractedData[index].options.toList()[i],
                           color: isPressed
-                              ? extractedData[index]
-                                          .incorrectAnswers
-                                          .toList()[i] ==
-                                      true
+                              ? (extractedData[index].options[i] ==
+                                      extractedData[index].correctAnswer
                                   ? correct
-                                  : incorrect
+                                  : incorrect)
                               : Colors.white,
                         ),
                       ),
@@ -215,85 +220,3 @@ class _TriviaScreenState extends State<TriviaScreen> {
     );
   }
 }
-
-// class TriviaScreen extends StatefulWidget {
-//   static const String routeName = "triviaScreen";
-
-//   const TriviaScreen({super.key});
-//   @override
-//   // ignore: library_private_types_in_public_api
-//   _TriviaScreenState createState() => _TriviaScreenState();
-// }
-
-// class _TriviaScreenState extends State<TriviaScreen> {
-//   late Future<List<TriviaQuestion>> futureQuestions;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     futureQuestions = fetchTriviaQuestions();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Trivia App'),
-//       ),
-//       body: Center(
-//         child: FutureBuilder<List<TriviaQuestion>>(
-//           future: futureQuestions,
-//           builder: (context, snapshot) {
-//             if (snapshot.hasData) {
-//               return TriviaList(questions: snapshot.data!);
-//             } else if (snapshot.hasError) {
-//               return Text('Error: ${snapshot.error}');
-//             }
-
-//             return const CircularProgressIndicator();
-//           },
-//         ),
-//       ),
-//     );
-//   }
-
-//   Future<List<TriviaQuestion>> fetchTriviaQuestions() async {
-//     final response =
-//         await http.get(Uri.parse('https://opentdb.com/api.php?amount=10'));
-//     if (response.statusCode == 200) {
-//       final Map<String, dynamic> data = json.decode(response.body);
-//       final List<Map<String, dynamic>> results = List.from(data['results']);
-//       return results.map((json) => TriviaQuestion.fromJson(json)).toList();
-//     } else {
-//       throw Exception('Failed to load trivia questions');
-//     }
-//   }
-// }
-
-// class TriviaList extends StatelessWidget {
-//   final List<TriviaQuestion> questions;
-
-//   const TriviaList({super.key, required this.questions});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView.builder(
-//       itemCount: questions.length,
-//       itemBuilder: (context, index) {
-//         return ListTile(
-//           title: Text(questions[index].question),
-//           subtitle: Text('Category: ${questions[index].category}'),
-//           onTap: () {
-//             Navigator.push(
-//               context,
-//               MaterialPageRoute(
-//                 builder: (context) =>
-//                     TriviaDetailScreen(question: questions[index]),
-//               ),
-//             );
-//           },
-//         );
-//       },
-//     );
-//   }
-// }

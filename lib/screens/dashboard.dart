@@ -71,28 +71,13 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  // void main() async {
-  //   try {
-  //     List<TriviaQuestion> questions = await callApi();
-  //     for (var question in questions) {
-  //       print('Category: ${question.category}');
-  //       print('Question: ${question.question}');
-  //       print('Correct Answer: ${question.correctAnswer}');
-  //       print('Incorrect Answers: ${question.incorrectAnswers}');
-  //       print('---');
-  //     }
-  //   } catch (e) {
-  //     print('Error: $e');
-  //   }
-  // }
-
   void settings() {
     Navigator.pushNamed(
         context, Settings.routeName); // change to pushReplacementNamed
   }
 
   void trivia() {
-    Navigator.pushNamed(
+    Navigator.pushReplacementNamed(
         context, TriviaScreen.routeName); // change to pushReplacementNamed
   }
 }

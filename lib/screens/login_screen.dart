@@ -86,7 +86,7 @@ class _LoginScreen extends State<LoginScreen> {
   }
 
   void login() {
-    Navigator.pushNamed(
+    Navigator.pushReplacementNamed(
         context, Dashboard.routeName); // change to pushReplacementNamed
   }
 
