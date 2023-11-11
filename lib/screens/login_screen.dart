@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobdev_midterm/constants.dart';
 import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
@@ -86,8 +85,7 @@ class _LoginScreen extends State<LoginScreen> {
   }
 
   void login() {
-    Navigator.pushReplacementNamed(
-        context, Dashboard.routeName); // change to pushReplacementNamed
+    Navigator.pushReplacementNamed(context, Dashboard.routeName);
   }
 
   void setPasswordVisibility() {

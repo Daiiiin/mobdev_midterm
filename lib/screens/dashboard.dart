@@ -1,10 +1,6 @@
-// // ignore_for_file: file_names
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobdev_midterm/constants.dart';
-// import 'package:mobdev_midterm/models/question_model.dart';
 import 'package:mobdev_midterm/screens/settings_screen.dart';
 import 'package:mobdev_midterm/screens/trivia_screen.dart';
 import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
@@ -72,12 +68,10 @@ class _DashboardState extends State<Dashboard> {
   }
 
   void settings() {
-    Navigator.pushNamed(
-        context, Settings.routeName); // change to pushReplacementNamed
+    Navigator.pushNamed(context, Settings.routeName);
   }
 
   void trivia() {
-    Navigator.pushReplacementNamed(
-        context, TriviaScreen.routeName); // change to pushReplacementNamed
+    Navigator.pushReplacementNamed(context, TriviaScreen.routeName);
   }
 }

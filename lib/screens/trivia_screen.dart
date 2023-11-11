@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:mobdev_midterm/constants.dart';
 import 'package:mobdev_midterm/models/question_model.dart';
 import 'package:mobdev_midterm/screens/dashboard.dart';
-// import 'package:mobdev_midterm/screens/trivia_detail_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:mobdev_midterm/widgets/trivia/next_button.dart';
 import 'package:mobdev_midterm/widgets/trivia/option_card.dart';
 import 'package:mobdev_midterm/widgets/trivia/question_widget.dart';
 import 'dart:convert';
-
 import 'package:mobdev_midterm/widgets/trivia/result_box.dart';
+import 'package:html_unescape/html_unescape.dart';
 
 class TriviaScreen extends StatefulWidget {
   static const String routeName = "triviaScreen";
@@ -49,7 +48,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
   bool isAlreadySelected = false;
   void nextQuestion(int questionLength) {
     if (index == questionLength - 1) {
-      // this is the block where the questions end.
+      // when there is no more questions
       showDialog(
           context: context,
           barrierDismissible:
@@ -67,7 +66,7 @@ class _TriviaScreenState extends State<TriviaScreen> {
     } else {
       if (isPressed) {
         setState(() {
-          index++; // when the index will change to 1. rebuild the app.
+          index++;
           isPressed = false;
           isAlreadySelected = false;
         });
@@ -80,17 +79,6 @@ class _TriviaScreenState extends State<TriviaScreen> {
       }
     }
   }
-
-  // void startOver() {
-  //   // setState(() {
-  //   //   index = 0;
-  //   //   score = 0;
-  //   //   isPressed = false;
-  //   //   isAlreadySelected = false;
-  //   // });
-  //   // Navigator.pop(context);
-  //   Navigator.pushReplacementNamed(context, Dashboard.routeName);
-  // }
 
   void checkAnswerAndUpdate(String value, String correctAnswer) {
     if (isAlreadySelected) {
@@ -108,7 +96,6 @@ class _TriviaScreenState extends State<TriviaScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // use the FutureBuilder Widget
     return FutureBuilder(
       future: _questions as Future<List<TriviaQuestion>>,
       builder: (ctx, snapshot) {
@@ -119,12 +106,9 @@ class _TriviaScreenState extends State<TriviaScreen> {
             );
           } else if (snapshot.hasData) {
             var extractedData = snapshot.data as List<TriviaQuestion>;
-            // var options = extractedData[index].inCorrectAnswers;
-            // options.add(extractedData[index].correctAnswer);
-            // options.shuffle();
+            var unescape = HtmlUnescape();
 
             return Scaffold(
-              // change the background
               backgroundColor: primary,
               appBar: AppBar(
                 title: const Text('Quiz App'),
@@ -145,21 +129,16 @@ class _TriviaScreenState extends State<TriviaScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Column(
                   children: [
-                    // add the questionWIdget here
                     QuestionWidget(
-                      indexAction: index, // currently at 0.
-                      question: extractedData[index]
-                          .question, // means the first question in the list.
-                      totalQuestions:
-                          extractedData.length, // total length of the list
+                      indexAction: index,
+                      question: extractedData[index].question =
+                          unescape.convert(extractedData[index].question),
+                      totalQuestions: extractedData.length,
                     ),
                     const Divider(color: Colors.white),
-                    // add some space
                     const SizedBox(height: 25.0),
                     for (int i = 0;
-                        // i < options.length;
                         i < extractedData[index].options.length;
-                        // i < extractedData[index].incorrectAnswers.length;
                         i++)
                       GestureDetector(
                         onTap: () => checkAnswerAndUpdate(
@@ -178,8 +157,6 @@ class _TriviaScreenState extends State<TriviaScreen> {
                   ],
                 ),
               ),
-
-              // use the floating action button
               floatingActionButton: GestureDetector(
                 onTap: () => nextQuestion(extractedData.length),
                 child: const Padding(

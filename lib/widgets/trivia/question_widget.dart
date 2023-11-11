@@ -7,7 +7,6 @@ class QuestionWidget extends StatelessWidget {
       required this.indexAction,
       required this.totalQuestions})
       : super(key: key);
-  // here we need the question title and the total number of questions, and also the index
 
   final String question;
   final int indexAction;
