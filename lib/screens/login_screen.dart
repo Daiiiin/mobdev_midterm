@@ -7,7 +7,6 @@ import 'package:mobdev_midterm/widgets/buttons/primary_button.dart';
 import 'package:mobdev_midterm/widgets/buttons/secondary_button.dart';
 import 'package:mobdev_midterm/widgets/formFields/custom_text_field.dart';
 import 'package:mobdev_midterm/widgets/formFields/password_field.dart';
-// import 'package:mobdev_midterm/screens/dashboard.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "login";
